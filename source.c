@@ -15,9 +15,9 @@
 
 // FAN
 #define en_FAN1 PORTB.0
-#define on_FAN1 PORTB.1	// Active low
+#define on_FAN1 PORTB.1 // Active low
 #define en_FAN2 PORTB.2
-#define on_FAN2 PORTB.3	// Active low
+#define on_FAN2 PORTB.3 // Active low
 unsigned char pwmFAN1,pwmFAN2,x;
 
 // Timer 0 overflow interrupt service routine
@@ -107,19 +107,19 @@ char strSuhu_[4];
 int  bts_bawah,bts_atas;
 
 void init_suhu() {
- 	bts_bawah = 29;
- 	bts_atas  = 33;
- 	define_char(_derajat,derajat); //simbol derajat
+  bts_bawah = 29;
+  bts_atas  = 33;
+  define_char(_derajat,derajat); //simbol derajat
 
- 	TCNT0=0xc0;
- 	//FAN off
- 	en_FAN1 = 1;
- 	on_FAN1 = 1;
- 	pwmFAN1 = 0;
+  TCNT0=0xc0;
+  //FAN off
+  en_FAN1 = 1;
+  on_FAN1 = 1;
+  pwmFAN1 = 0;
 
- 	en_FAN2 = 1;
- 	on_FAN2 = 1;
- 	pwmFAN2 = 0;
+  en_FAN2 = 1;
+  on_FAN2 = 1;
+  pwmFAN2 = 0;
 }
 
 // Declare your global variables here
@@ -135,352 +135,352 @@ void init_suhu() {
 #define R4 7
 
 char getKeypad () {
-	char dataKeypad;
+  char dataKeypad;
 
-	dataKeypad = 'x';
-	keypad_as  = 0xF8; //C1 - C2 as input
+  dataKeypad = 'x';
+  keypad_as  = 0xF8; //C1 - C2 as input
 
   chkR1:
-  	keypad = 0xeF;
+    keypad = 0xeF;
   chkR1C1:
-  	if ( keypad_in.0 ==1 ) {
+    if ( keypad_in.0 ==1 ) {
       goto chkR1C2;
     }
-  	delay_ms(100);
-  	dataKeypad = '*';
-  	goto gotKeypad;
+    delay_ms(100);
+    dataKeypad = '*';
+    goto gotKeypad;
   chkR1C2:
-  	if ( keypad_in.1 == 1 ) {
+    if ( keypad_in.1 == 1 ) {
       goto chkR1C3;
     }
-  	delay_ms(100);
-  	dataKeypad='2';
-  	goto gotKeypad;
+    delay_ms(100);
+    dataKeypad='2';
+    goto gotKeypad;
   chkR1C3:
-  	if ( keypad_in.2 == 1 ) {
+    if ( keypad_in.2 == 1 ) {
       goto chkR2;
     }
-  	delay_ms(100);
-  	dataKeypad='3';
-  	goto gotKeypad;
+    delay_ms(100);
+    dataKeypad='3';
+    goto gotKeypad;
   chkR2:
-  	keypad = 0xd0 ; // Gives pullup
+    keypad = 0xd0 ; // Gives pullup
   chkR2C1:
-  	if ( keypad_in.C1 == 1 ) {
+    if ( keypad_in.C1 == 1 ) {
       goto chkR2C2;
     }
-  	delay_ms(100);
-  	dataKeypad = '1';
-  	goto gotKeypad;
+    delay_ms(100);
+    dataKeypad = '1';
+    goto gotKeypad;
   chkR2C2:
-  	if ( keypad_in.C2 == 1 ) {
+    if ( keypad_in.C2 == 1 ) {
       goto chkR2C3;
     }
-  	delay_ms(100);
-  	dataKeypad = '5';
-  	goto gotKeypad;
+    delay_ms(100);
+    dataKeypad = '5';
+    goto gotKeypad;
   chkR2C3:
-  	if ( keypad_in.C3 == 1 ) {
+    if ( keypad_in.C3 == 1 ) {
       goto chkR3;
     }
-  	delay_ms(100);
-  	dataKeypad = '6';
-  	goto gotKeypad;
+    delay_ms(100);
+    dataKeypad = '6';
+    goto gotKeypad;
   chkR3:
-  	keypad  = 0xb0 ;
+    keypad  = 0xb0 ;
   chkR3C1:
-  	if ( keypad_in.C1 == 1 ) {
+    if ( keypad_in.C1 == 1 ) {
       goto chkR3C2;
     }
-  	delay_ms(100);
-  	dataKeypad = '4';
-  	goto gotKeypad;
+    delay_ms(100);
+    dataKeypad = '4';
+    goto gotKeypad;
   chkR3C2:
-  	if ( keypad_in.C2 == 1 ) {
+    if ( keypad_in.C2 == 1 ) {
       goto chkR3C3;
     }
-  	delay_ms(100);
-  	dataKeypad = '8';
-  	goto gotKeypad;
+    delay_ms(100);
+    dataKeypad = '8';
+    goto gotKeypad;
   chkR3C3:
-  	if ( keypad_in.C3 == 1 ) {
+    if ( keypad_in.C3 == 1 ) {
       goto chkR4;
     }
-  	delay_ms(100);
-  	dataKeypad = '9';
-  	goto gotKeypad;
+    delay_ms(100);
+    dataKeypad = '9';
+    goto gotKeypad;
   chkR4:
-  	keypad = 0x70;
+    keypad = 0x70;
   chkR4C1:
-  	if ( keypad_in.C1 == 1 ) {
+    if ( keypad_in.C1 == 1 ) {
       goto chkR4C2;
     }
-  	delay_ms(100);
-  	dataKeypad = '7';
-  	goto gotKeypad;
+    delay_ms(100);
+    dataKeypad = '7';
+    goto gotKeypad;
   chkR4C2:
-  	if ( keypad_in.C2 == 1 ) {
+    if ( keypad_in.C2 == 1 ) {
       goto chkR4C3;
     }
-  	delay_ms(100);
-  	dataKeypad = '0';
-  	goto gotKeypad;
+    delay_ms(100);
+    dataKeypad = '0';
+    goto gotKeypad;
   chkR4C3:
-  	if ( keypad_in.C3 == 1 ) {
+    if ( keypad_in.C3 == 1 ) {
       goto gotKeypad;
     }
-  	delay_ms(100);
-  	dataKeypad = '#';
+    delay_ms(100);
+    dataKeypad = '#';
   gotKeypad:
-  	delay_ms(50);
-  	return dataKeypad;
+    delay_ms(50);
+    return dataKeypad;
 }
 
 char inSuhu[3];
 void _inSuhu(unsigned char batas) {
-	char i, tmp;
+  char i, tmp;
 
   ambil:
- 	for ( i = 0; i < 3; i++ ) {
- 		inSuhu[i]='x';
- 	}
+  for ( i = 0; i < 3; i++ ) {
+    inSuhu[i]='x';
+  }
 
-	lcd_gotoxy(0,1);
- 	cursor_on();
- 	for ( i = 0; i < 3; i++ ) {
- 		_ambil:
- 		do {
- 			inSuhu[i] = getKeypad();
- 		} while ( inSuhu[i] == 'x');
+  lcd_gotoxy(0,1);
+  cursor_on();
+  for ( i = 0; i < 3; i++ ) {
+    _ambil:
+    do {
+      inSuhu[i] = getKeypad();
+    } while ( inSuhu[i] == 'x');
 
- 		if ( inSuhu[i] == '*') {
- 			goto done;
- 		} else if ( inSuhu[i] == '#') {
- 			goto done;
- 		} else {
- 		 	lcd_gotoxy(i,1);
- 			lcd_putchar(inSuhu[i]);
- 		}
- 	}
+    if ( inSuhu[i] == '*') {
+      goto done;
+    } else if ( inSuhu[i] == '#') {
+      goto done;
+    } else {
+      lcd_gotoxy(i,1);
+      lcd_putchar(inSuhu[i]);
+    }
+  }
 
- 	done:
- 	// Check first digit
- 	if ( inSuhu[0] == '*')  {
+  done:
+  // Check first digit
+  if ( inSuhu[0] == '*')  {
     // If no input but OK is pressed
- 		goto ambil;
-	}
-	if ( inSuhu[0] == '#' ) {
+    goto ambil;
+  }
+  if ( inSuhu[0] == '#' ) {
     // If no input but Cancel is pressed
     goto exit; // Upper threshold doesn't change
-	}
+  }
 
- 	// Convert data
- 	if ( inSuhu[1] == '*' ) {
+  // Convert data
+  if ( inSuhu[1] == '*' ) {
     // One digit, index 0
- 		if ( batas == 0) {
- 			tmp = bts_bawah;
- 			inSuhu[1] = '';
- 			inSuhu[2] = '';
- 			bts_bawah = atoi(inSuhu);
- 			if ( bts_bawah > bts_atas ) {
- 				cursor_off();
- 		 		lcd_clear();
- 		 		lcd_gotoxy(0,0);
- 		 		lcd_putsf("Bts bawah mele-");
- 		 		lcd_gotoxy(0,1);
- 		 		lcd_putsf("bihi bts atas!!");
- 		 		bts_bawah = tmp;
- 		 		delay_ms(1500);
-
- 		 		lcd_clear();
- 		 		lcd_gotoxy(0,0);
- 		 		lcd_putsf("Input bts bawah:");
- 		 		goto ambil;
- 			} else {
-        goto exit;
- 			}
- 		} else {
- 		 	tmp = bts_atas;
- 		 	inSuhu[1] = '';
- 			inSuhu[2] = '';
- 			bts_atas = atoi(inSuhu);
- 			if ( bts_atas < bts_bawah ) {
- 				cursor_off();
- 		 		lcd_clear();
- 		 		lcd_gotoxy(0,0);
- 		 		lcd_putsf("Bts atas kurang");
- 		 		lcd_gotoxy(0,1);
- 		 		lcd_putsf("dari bts bawah!!");
- 		 		bts_atas=tmp;
- 		 		delay_ms(1500);
-
- 		 		lcd_clear();
- 		 		lcd_gotoxy(0,0);
- 		 		lcd_putsf("Input bts atas:");
- 		 		goto ambil;
- 		 	} else if ( bts_atas > 150 ) {
- 		 		cursor_off();
- 		 		lcd_clear();
- 		 		lcd_gotoxy(0,0);
- 		 		lcd_putsf("Bts atas lebih");
- 		 		lcd_gotoxy(0,1);
- 		 		lcd_putsf("dari 150");
- 		 		lcd_putchar(derajat);
- 		 		lcd_putchar('C');
- 		 		lcd_putsf(" !!");
- 		 		bts_atas = tmp;
- 		 		delay_ms(1500);
-
- 		 		lcd_clear();
- 		 		lcd_gotoxy(0,0);
- 		 		lcd_putsf("Input bts atas:");
- 		 		goto ambil;
- 			} else {
-        goto exit;
- 			}
- 		}
-
- 	} else if ( inSuhu[1] == '#' ) {
-    // Back to index 0
- 		lcd_gotoxy(1,1);
- 		lcd_putchar(' ');
- 		lcd_gotoxy(0,1);
- 		lcd_putchar(' ');
- 		lcd_gotoxy(0,1);
- 		i = 0;
- 	  goto _ambil;
- 	} else if ( inSuhu[2] == '*') {
- 	 	// Two digits
- 	 	if ( batas == 0 ) {
- 			tmp=bts_bawah;
- 			inSuhu[2] = '';
- 			bts_bawah = atoi(inSuhu);
- 			if ( bts_bawah > bts_atas ) {
- 				cursor_off();
- 		 		lcd_clear();
- 		 		lcd_gotoxy(0,0);
- 		 		lcd_putsf("Bts bawah mele-");
- 		 		lcd_gotoxy(0,1);
- 		 		lcd_putsf("bihi bts atas!!");
- 		 		bts_bawah = tmp;
- 		 		delay_ms(1500);
-
- 		 		lcd_clear();
- 		 		lcd_gotoxy(0,0);
- 		 		lcd_putsf("Input bts bawah:");
- 		 		goto ambil;
- 			} else {
-        goto exit;
- 			}
- 		} else {
- 		 	tmp = bts_atas;
- 			inSuhu[2] = '';
- 			bts_atas = atoi(inSuhu);
- 			if ( bts_atas < bts_bawah ) {
- 				cursor_off();
- 		 		lcd_clear();
- 		 		lcd_gotoxy(0,0);
- 		 		lcd_putsf("Bts atas kurang");
- 		 		lcd_gotoxy(0,1);
- 		 		lcd_putsf("dari bts bawah!!");
- 		 		bts_atas = tmp;
- 		 		delay_ms(1500);
-
- 		 		lcd_clear();
- 		 		lcd_gotoxy(0,0);
- 		 		lcd_putsf("Input bts atas:");
- 		 		goto ambil;
- 		 	} else if ( bts_atas > 150 ) {
- 		 		cursor_off();
- 		 		lcd_clear();
- 		 		lcd_gotoxy(0,0);
- 		 		lcd_putsf("Bts atas lebih");
- 		 		lcd_gotoxy(0,1);
- 		 		lcd_putsf("dari 150");
- 		 		lcd_putchar(derajat);
- 		 		lcd_putchar('C');
- 		 		lcd_putsf(" !!");
- 		 		bts_atas = tmp;
- 		 		delay_ms(1500);
-
- 		 		lcd_clear();
- 		 		lcd_gotoxy(0,0);
- 		 		lcd_putsf("Input bts atas:");
- 		 		goto ambil;
- 			} else {
-        goto exit;
- 			}
- 		}
- 	} else if ( inSuhu[2] == '#' ) {
-    // Back to index 1
- 	 	lcd_gotoxy(2,1);
- 		lcd_putchar(' ');
- 		lcd_gotoxy(1,1);
- 		lcd_putchar(' ');
- 		lcd_gotoxy(1,1);
- 	 	i = 1;
- 	 	goto _ambil;
- 	}
-
- 	exit:
- 	if ( i == 3 ) {
-    if ( batas == 0 ) {
-    	tmp = bts_bawah;
+    if ( batas == 0) {
+      tmp = bts_bawah;
+      inSuhu[1] = '';
+      inSuhu[2] = '';
       bts_bawah = atoi(inSuhu);
       if ( bts_bawah > bts_atas ) {
         cursor_off();
-    		lcd_clear();
-    		lcd_gotoxy(0,0);
-    		lcd_putsf("Bts bawah mele-");
-    		lcd_gotoxy(0,1);
-    		lcd_putsf("bihi bts atas!!");
-    		bts_bawah=tmp;
-    		delay_ms(1500);
+        lcd_clear();
+        lcd_gotoxy(0,0);
+        lcd_putsf("Bts bawah mele-");
+        lcd_gotoxy(0,1);
+        lcd_putsf("bihi bts atas!!");
+        bts_bawah = tmp;
+        delay_ms(1500);
 
-    		lcd_clear();
-    		lcd_gotoxy(0,0);
-    		lcd_putsf("Input bts bawah:");
-    		goto ambil;
+        lcd_clear();
+        lcd_gotoxy(0,0);
+        lcd_putsf("Input bts bawah:");
+        goto ambil;
+      } else {
+        goto exit;
+      }
+    } else {
+      tmp = bts_atas;
+      inSuhu[1] = '';
+      inSuhu[2] = '';
+      bts_atas = atoi(inSuhu);
+      if ( bts_atas < bts_bawah ) {
+        cursor_off();
+        lcd_clear();
+        lcd_gotoxy(0,0);
+        lcd_putsf("Bts atas kurang");
+        lcd_gotoxy(0,1);
+        lcd_putsf("dari bts bawah!!");
+        bts_atas=tmp;
+        delay_ms(1500);
+
+        lcd_clear();
+        lcd_gotoxy(0,0);
+        lcd_putsf("Input bts atas:");
+        goto ambil;
+      } else if ( bts_atas > 150 ) {
+        cursor_off();
+        lcd_clear();
+        lcd_gotoxy(0,0);
+        lcd_putsf("Bts atas lebih");
+        lcd_gotoxy(0,1);
+        lcd_putsf("dari 150");
+        lcd_putchar(derajat);
+        lcd_putchar('C');
+        lcd_putsf(" !!");
+        bts_atas = tmp;
+        delay_ms(1500);
+
+        lcd_clear();
+        lcd_gotoxy(0,0);
+        lcd_putsf("Input bts atas:");
+        goto ambil;
+      } else {
+        goto exit;
+      }
+    }
+
+  } else if ( inSuhu[1] == '#' ) {
+    // Back to index 0
+    lcd_gotoxy(1,1);
+    lcd_putchar(' ');
+    lcd_gotoxy(0,1);
+    lcd_putchar(' ');
+    lcd_gotoxy(0,1);
+    i = 0;
+    goto _ambil;
+  } else if ( inSuhu[2] == '*') {
+    // Two digits
+    if ( batas == 0 ) {
+      tmp=bts_bawah;
+      inSuhu[2] = '';
+      bts_bawah = atoi(inSuhu);
+      if ( bts_bawah > bts_atas ) {
+        cursor_off();
+        lcd_clear();
+        lcd_gotoxy(0,0);
+        lcd_putsf("Bts bawah mele-");
+        lcd_gotoxy(0,1);
+        lcd_putsf("bihi bts atas!!");
+        bts_bawah = tmp;
+        delay_ms(1500);
+
+        lcd_clear();
+        lcd_gotoxy(0,0);
+        lcd_putsf("Input bts bawah:");
+        goto ambil;
+      } else {
+        goto exit;
+      }
+    } else {
+      tmp = bts_atas;
+      inSuhu[2] = '';
+      bts_atas = atoi(inSuhu);
+      if ( bts_atas < bts_bawah ) {
+        cursor_off();
+        lcd_clear();
+        lcd_gotoxy(0,0);
+        lcd_putsf("Bts atas kurang");
+        lcd_gotoxy(0,1);
+        lcd_putsf("dari bts bawah!!");
+        bts_atas = tmp;
+        delay_ms(1500);
+
+        lcd_clear();
+        lcd_gotoxy(0,0);
+        lcd_putsf("Input bts atas:");
+        goto ambil;
+      } else if ( bts_atas > 150 ) {
+        cursor_off();
+        lcd_clear();
+        lcd_gotoxy(0,0);
+        lcd_putsf("Bts atas lebih");
+        lcd_gotoxy(0,1);
+        lcd_putsf("dari 150");
+        lcd_putchar(derajat);
+        lcd_putchar('C');
+        lcd_putsf(" !!");
+        bts_atas = tmp;
+        delay_ms(1500);
+
+        lcd_clear();
+        lcd_gotoxy(0,0);
+        lcd_putsf("Input bts atas:");
+        goto ambil;
+      } else {
+        goto exit;
+      }
+    }
+  } else if ( inSuhu[2] == '#' ) {
+    // Back to index 1
+    lcd_gotoxy(2,1);
+    lcd_putchar(' ');
+    lcd_gotoxy(1,1);
+    lcd_putchar(' ');
+    lcd_gotoxy(1,1);
+    i = 1;
+    goto _ambil;
+  }
+
+  exit:
+  if ( i == 3 ) {
+    if ( batas == 0 ) {
+      tmp = bts_bawah;
+      bts_bawah = atoi(inSuhu);
+      if ( bts_bawah > bts_atas ) {
+        cursor_off();
+        lcd_clear();
+        lcd_gotoxy(0,0);
+        lcd_putsf("Bts bawah mele-");
+        lcd_gotoxy(0,1);
+        lcd_putsf("bihi bts atas!!");
+        bts_bawah=tmp;
+        delay_ms(1500);
+
+        lcd_clear();
+        lcd_gotoxy(0,0);
+        lcd_putsf("Input bts bawah:");
+        goto ambil;
       }
     } else {
 
       tmp = bts_atas;
       bts_atas = atoi(inSuhu);
       if ( bts_atas < bts_bawah ) {
-				cursor_off();
-		 		lcd_clear();
-		 		lcd_gotoxy(0,0);
-		 		lcd_putsf("Bts atas kurang");
-		 		lcd_gotoxy(0,1);
-		 		lcd_putsf("dari bts bawah!!");
-		 		bts_atas = tmp;
-		 		delay_ms(1500);
+        cursor_off();
+        lcd_clear();
+        lcd_gotoxy(0,0);
+        lcd_putsf("Bts atas kurang");
+        lcd_gotoxy(0,1);
+        lcd_putsf("dari bts bawah!!");
+        bts_atas = tmp;
+        delay_ms(1500);
 
-		 		lcd_clear();
-		 		lcd_gotoxy(0,0);
-		 		lcd_putsf("Input bts atas:");
-		 		goto ambil;
-		 	} else if ( bts_atas > 150 ) {
-		 		cursor_off();
-		 		lcd_clear();
-		 		lcd_gotoxy(0,0);
-		 		lcd_putsf("Bts atas lebih");
-		 		lcd_gotoxy(0,1);
-		 		lcd_putsf("dari 150");
-		 		lcd_putchar(derajat);
-		 		lcd_putchar('C');
-		 		lcd_putsf(" !!");
-		 		bts_atas = tmp;
-		 		delay_ms(1500);
+        lcd_clear();
+        lcd_gotoxy(0,0);
+        lcd_putsf("Input bts atas:");
+        goto ambil;
+      } else if ( bts_atas > 150 ) {
+        cursor_off();
+        lcd_clear();
+        lcd_gotoxy(0,0);
+        lcd_putsf("Bts atas lebih");
+        lcd_gotoxy(0,1);
+        lcd_putsf("dari 150");
+        lcd_putchar(derajat);
+        lcd_putchar('C');
+        lcd_putsf(" !!");
+        bts_atas = tmp;
+        delay_ms(1500);
 
-		 		lcd_clear();
-		 		lcd_gotoxy(0,0);
-		 		lcd_putsf("Input bts atas:");
-		 		goto ambil;
- 		 	}
- 	  }
- 		delay_ms(700);
- 	}
+        lcd_clear();
+        lcd_gotoxy(0,0);
+        lcd_putsf("Input bts atas:");
+        goto ambil;
+      }
+    }
+    delay_ms(700);
+  }
 }
 
 /**
@@ -489,36 +489,36 @@ void _inSuhu(unsigned char batas) {
  * @return void
  */
 void inBatasBawah() {
- 	lcd_clear();
- 	lcd_gotoxy(0,0);
- 	lcd_putsf("Input bts bawah");
- 	lcd_gotoxy(0,1);
- 	lcd_putsf("* OK, # batal");
- 	delay_ms(1500);
+  lcd_clear();
+  lcd_gotoxy(0,0);
+  lcd_putsf("Input bts bawah");
+  lcd_gotoxy(0,1);
+  lcd_putsf("* OK, # batal");
+  delay_ms(1500);
 
- 	// Get input
- 	lcd_clear();
- 	lcd_gotoxy(0,0);
- 	lcd_putsf("Input bts bawah:");
- 	_inSuhu(0);
+  // Get input
+  lcd_clear();
+  lcd_gotoxy(0,0);
+  lcd_putsf("Input bts bawah:");
+  _inSuhu(0);
 }
 
 /**
  * Input to set upper threshold
  */
 void inBatasAtas() {
- 	lcd_clear();
- 	lcd_gotoxy(0,0);
- 	lcd_putsf("Input bts atas");
- 	lcd_gotoxy(0,1);
- 	lcd_putsf("* OK, # batal");
- 	delay_ms(1500);
+  lcd_clear();
+  lcd_gotoxy(0,0);
+  lcd_putsf("Input bts atas");
+  lcd_gotoxy(0,1);
+  lcd_putsf("* OK, # batal");
+  delay_ms(1500);
 
- 	// Get input
- 	lcd_clear();
- 	lcd_gotoxy(0,0);
- 	lcd_putsf("Input bts atas:");
- 	_inSuhu(1);
+  // Get input
+  lcd_clear();
+  lcd_gotoxy(0,0);
+  lcd_putsf("Input bts atas:");
+  _inSuhu(1);
 }
 
 void main(void) {
@@ -645,18 +645,18 @@ void main(void) {
     itoa(suhu_,strSuhu_);
 
     // Shows the temperature
-  	lcd_gotoxy(0,1);
-  	lcd_puts(strSuhu);
-  	lcd_putchar('.');
+    lcd_gotoxy(0,1);
+    lcd_puts(strSuhu);
+    lcd_putchar('.');
     lcd_puts(strSuhu_);
-  	lcd_putchar(derajat);
-  	lcd_putchar('C');
+    lcd_putchar(derajat);
+    lcd_putchar('C');
 
     // Adjust FAN based on temperature
     if ( suhu < bts_bawah ) {
-     	// FAN1 & FAN 2 off
-    	on_FAN1 = 1;
-    	on_FAN2 = 1;
+      // FAN1 & FAN 2 off
+      on_FAN1 = 1;
+      on_FAN2 = 1;
     } else if ( suhu > bts_bawah && suhu < bts_atas ) {
       // FAN1 ON & FAN 2 off
       pwmFAN1 = 150 + (suhu - bts_bawah);
@@ -672,8 +672,8 @@ void main(void) {
 
     key = getKeypad();
     if ( key == '*' ) {
-    	inBatasBawah();
-    	lcd_clear();
+      inBatasBawah();
+      lcd_clear();
     } else if ( key == '#' ) {
       inBatasAtas();
       lcd_clear();
